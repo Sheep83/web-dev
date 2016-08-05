@@ -1,0 +1,50 @@
+
+
+body {
+  /*background-size: cover;*/
+  font-size: 16px;
+}
+
+#info{
+  border: 2px solid black;
+  margin: 10px;
+  padding: 5px;
+  width: 90%;
+  border-radius: 10px;
+  background-color: rgba( 0, 0, 0, 0.168676 );
+  box-shadow: 5px 5px 2px black;
+  color: black;
+
+}
+
+#separator {
+  margin: 10px;
+}
+
+#dropDown{
+  margin-left: 10px;
+}
+
+button {
+
+  text-decoration: none;
+}
+
+a {
+
+  text-decoration: none;
+}
+
+#img{
+  margin: auto;
+  clear: both;
+  width: 400px;
+  /*height: 300px;*/
+  height: auto;
+}
+
+input[type] {
+  margin: 10px;
+}
+
+ 

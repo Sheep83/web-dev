@@ -1,0 +1,162 @@
+
+
+body {
+  font-size: 16px;
+  background-image: url('Moon 09_09_2012 05_19_31.jpg');
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
+  text-decoration: none;
+
+}
+
+#top-container{
+  border-radius: 5px;
+  border: 3px solid black;
+  background: rgba(186, 190, 192, .5);
+  /*background: #3a7999;*/
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+#button-container{
+  text-decoration: none;
+}
+
+#logo{
+  height: 90px;
+  width: 90px;
+  margin: 1px;
+  position: absolute;
+  text-align: left;
+  /*clear: all;*/
+}
+
+#info{
+  background: rgba(186, 190, 192, .9);
+  color: #333333;
+  border: 2px solid black;
+  margin: auto;
+  padding: 20px;
+  width: 95%;
+  border-radius: 5px;
+  box-shadow: 5px 5px 2px black;
+}
+
+#separator {
+  width: 100%;
+  margin-top: 5px;
+  clear: both;
+}
+
+#dropDown{
+  margin-left: 10px;
+}
+
+
+a {
+
+  text-decoration: none;
+}
+
+#img{
+  /*align-items: center;*/
+  margin-right: 20px;
+  padding-bottom:20px;
+  padding-top:20px;
+  padding-left:20px;
+  /*margin: auto;*/
+  /*float: left;*/
+  /*width: 400;
+  height: 300;*/
+  height: auto;
+
+}
+
+#subheading{
+  padding-top: 10px;
+  margin: auto;
+  margin-bottom: 5px;
+  width: 100%;
+  height: auto;
+  clear: both;
+}
+
+button {
+  padding: 8px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px 2px black;
+  border: 1px;
+  border-color: black;
+  background: #3a7999;
+  color: #f2f2f2;
+  font-size: 14px;
+  border-radius: 5px;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 500ms ease; 
+}
+
+img:hover {
+  /*transform: skew(-10deg);*/
+  transform: scale(1.75);
+}
+
+img{
+  border: 2px solid black;
+  border-radius: 5px;
+  transition: all 500ms ease;
+  box-shadow: 5px 5px 2px black;
+}
+
+button:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+}
+button:focus {
+    outline:none;
+    text-decoration: none;
+}
+
+form{
+  /*background: rgba(186, 190, 192, .5);*/
+  /*border: 2px solid black;*/
+  /*border-radius: 5px;*/
+  /*box-shadow: 5px 5px 2px black;*/
+  width: 300px;
+  height:370px;
+  float: left;
+}
+
+#topbar{
+  height: auto;
+}
+
+select {
+    font-size:9pt;
+    letter-spacing:0.07em;
+    color:#808080;
+    /*background:transparent;*/
+    border: solid 1px #808080;
+    padding:3px;
+    cursor:pointer;
+}
+select option { padding: 1px 5px 1px 3px;}
+select option[selected]{ color:#303030; }
+select option:nth-child(even) { background-color:#e5e5e5; }
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(60, 60, 60, 0), rgba(60, 60, 60, 0.75), rgba(60, 60, 60, 0));
+}
+
+
+
+
+
+
+
+
+
+
