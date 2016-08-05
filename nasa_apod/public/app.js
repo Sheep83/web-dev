@@ -100,25 +100,28 @@ var randomDate = function(){
   randDate = array.join('-');
   // console.log(randDate);
   url = 'https://api.nasa.gov/planetary/apod?date=' + randDate + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
-  // var request = new XMLHttpRequest();
-  // request.open("GET", url);
-  // request.onload = function () {
-  //   if (request.status === 200) {
-  //     var jsonString = request.responseText;
-  //     var data = JSON.parse(jsonString);
-  //     console.log(data);
-      // localStorage.setItem('selectedHistory', JSON.stringify(data));
+  var request = new XMLHttpRequest();
+  request.open("GET", url);
+  request.onload = function () {
+    if (request.status === 200) {
+      var jsonString = request.responseText;
+      var data = JSON.parse(jsonString);
+      console.log(data);
+      }// localStorage.setItem('selectedHistory', JSON.stringify(data));
       // console.log(localStorage);
       // addToStorage(data);
       // console.log(localStorage);
+      /// adds to mongodb
       var request = new XMLHttpRequest();
-      request.open("GET", '/history');
+      request.open("POST", '/history');
       request.setRequestHeader("Content-Type", "application/json");
-       // console.log(request);
-       request.onload = function(){
-         if(request.status === 200){
-           var searches = JSON.parse(request.responseText)
-         }
+      console.log(request);
+      request.onload = function(){
+       if(request.status === 200){
+       }
+     }
+     request.send(JSON.stringify(data));
+   }
          // console.log(searches);
 
       // console.log(data);
@@ -144,7 +147,7 @@ var randomDate = function(){
       //     console.log(objectsGot);
 
 
-          
+
           // visited.push(data);
 
           // local.push(data);
@@ -187,7 +190,7 @@ var randomDate = function(){
         local2 = JSON.parse(local);
         // console.log(local[0]);
         if (local === null){
-        return
+          return
         }else{
           visited.push(local)
           var historyDropDown = document.querySelector('#history');
