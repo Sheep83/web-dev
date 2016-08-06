@@ -8,47 +8,50 @@
 </head>
 
 <body>
-<div id = 'top-container'>
-    <div id = 'topbar'>
-    <h1><center>Astronomy Pic of the Day<center></h1>
-    <hr>
+    <div id = 'top-container'>
+        <div id = 'topbar'>
+            <h1><center>Astronomy Pic of the Day<center></h1>
+            <hr>
+        </div>
+        <div id ="subheading">
+        </div>
     </div>
-    <div id ="subheading">
-    </div>
-</div>
     <form>
-    <div id='mini-head'><img src='/calendar.png'></img></div>
+        <div id='mini-head'><img src='/calendar.png'></img></div>
         <input id = "inputDate" type="date" name="apodDate">
         <div id="separator">
           <hr>
-        </div>
-        <div id = 'mini-head'><img width=36 height = 36 src='/history.png'></img></div>
-        <select style="max-width:95%" id="history">
-        </select>
-        <div id="separator">
+      </div>
+      <div id = 'mini-head'><img width=36 height = 36 src='/history.png'></img></div>
+      <select style="max-width:95%" id="history">
+      </select>
+      <div id="separator">
           <hr>
-        </div>
-        <button id = "random" class = 'grow' type="button">Random APoD</button>
-        </div>
-        <div id="separator">
+      </div>
+      <button id = "random" class = 'grow' type="button">Random APoD</button>
+      <div id="separator">
           <hr>
-        </div>
-        <div id = "button-container">
+      </div>
+      <div id = "button-container">
         <button id = "fullSize" class = 'grow' type="button">Full Size</button> 
-        </div> 
-    </form>
-    <a href='/'>
-    <div id = 'img' class = 'grow' align = 'center'></div>  
-    </a>
-    <div id = 'separator'>
-    </div>
-    <div id="info" align = 'justify'>
-      <p>Description: </p>
-      <p>Copyright: </p> 
-      <p>Date: </p>    
-       
+    </div> 
+    <div id="separator">
+      <hr>
   </div>
-  <div id = 'separator'></div>
+  <button id = "favourite" class = 'grow' type="button">Favourite</button> 
+</form>
+<a href='/'>
+    <div id = 'img' class = 'grow' align = 'center'></div>  
+</a>
+<div id = 'separator'>
+</div>
+<div id="info" align = 'justify'>
+  <p>Description: </p>
+  <p>Copyright: </p> 
+  <p>Date: </p>    
+
+</div>
+<div id = 'separator'></div>
 </body>
 
 </html>

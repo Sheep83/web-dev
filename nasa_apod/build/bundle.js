@@ -44,19 +44,20 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	window.onload = function () {
-	  history = [];
+	var lastImage = [];
+	
+	window.onload = function () {  
 	  visited = [];
 	  var url = 'https://api.nasa.gov/planetary/apod?&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
 	  var calendar = document.getElementById('inputDate');
 	  var button = document.getElementById('random');
 	  var historyDropDown = document.getElementById('history');
 	  var fullSizeButton = document.getElementById('fullSize');
-	  var local = localStorage;
-	  console.log(local);
+	  var favouriteButton = document.getElementById('favourite')
 	  calendar.onchange = getByDate;
 	  button.onclick = randomDate;
 	  historyDropDown.onchange = getFromHistory;
+	  favouriteButton.onclick = addToFavourites;
 	    // fullSizeButton.onclick = showFullSize;
 	    // console.log(url);
 	    var request = new XMLHttpRequest();
@@ -65,9 +66,9 @@
 	      if (request.status === 200) {
 	        var jsonString = request.responseText;
 	        var data = JSON.parse(jsonString);
-	        console.log(data);
+	        // console.log(data);
 	      }
-	      main(data, local)
+	      main(data);
 	    }
 	    request.send();
 	  }
@@ -81,7 +82,7 @@
 	    var stats = document.querySelectorAll('#info p');
 	    var title = document.getElementById('subheading');
 	    var image = document.getElementById('fullSize');
-	    console.log(data.hdurl);
+	    // console.log(data.hdurl);
 	
 	    image.innerHTML = "<a href= '"+ data.hdurl + "'>Full Size"
 	
@@ -97,6 +98,13 @@
 	      console.log('Video Support Coming Soon!')
 	      // showVideo(data.url, 500, 375, data.url)
 	    }
+	    if (lastImage.length > 0){
+	      lastImage.pop();
+	      lastImage.push(data);
+	    }else{
+	      lastImage.push(data);
+	    }
+	    console.log(lastImage);
 	  }
 	
 	  var showImage = function(src, width, height, alt) {
@@ -125,7 +133,7 @@
 	  randYear = Math.floor(Math.random() * (2015 - 1996) + 1996);
 	  array.push(randYear, randMonth, randDay);
 	  randDate = array.join('-');
-	  console.log(randDate);
+	  // console.log(randDate);
 	  url = 'https://api.nasa.gov/planetary/apod?date=' + randDate + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
 	  var request = new XMLHttpRequest();
 	  request.open("GET", url);
@@ -135,7 +143,7 @@
 	         if(request.status === 200){
 	          var jsonString = request.responseText;
 	          var data = JSON.parse(jsonString);
-	          console.log(data);
+	          // console.log(data);
 	          visited.push(data);
 	        } 
 	        main(data);
@@ -145,7 +153,7 @@
 	    }
 	
 	    var getByDate = function(event){
-	      console.log(event);
+	      // console.log(event);
 	      selected = event.target.value;
 	      url = 'https://api.nasa.gov/planetary/apod?&date=' + selected + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
 	      var request = new XMLHttpRequest();
@@ -156,22 +164,22 @@
 	          var data = JSON.parse(jsonString);
 	          visited.push(data);
 	          var length = localStorage.length;
-	          }
-	          main(data);
 	        }
-	        request.send();
+	        main(data);
 	      }
+	      request.send();
+	    }
 	
-	      var populateHistory = function(){
-	        var request = new XMLHttpRequest();
-	        request.open("GET", '/history');
-	        request.setRequestHeader("Content-Type", "application/json");
+	    var populateHistory = function(){
+	      var request = new XMLHttpRequest();
+	      request.open("GET", '/history');
+	      request.setRequestHeader("Content-Type", "application/json");
 	             // console.log(request);
 	             request.onload = function(){
 	               if(request.status === 200){
 	                var jsonString = request.responseText;
 	                var history = JSON.parse(jsonString);
-	                console.log(history);
+	                // console.log(history);
 	              }
 	              var historyDropDown = document.querySelector('#history');
 	              historyDropDown.innerHTML = "";
@@ -183,13 +191,13 @@
 	                historyDropDown.appendChild(option);
 	              });
 	              historyDropDown.style.display = 'block';
-	              }
-	              request.send();
-	
 	            }
+	            request.send();
 	
-	            var getFromHistory = function(event){
-	              console.log(event);
+	          }
+	
+	          var getFromHistory = function(event){
+	              // console.log(event);
 	              var index = this.value;
 	              var request = new XMLHttpRequest();
 	              request.open("GET", '/history');
@@ -199,26 +207,42 @@
 	                     if(request.status === 200){
 	                      var jsonString = request.responseText;
 	                      var history = JSON.parse(jsonString);
-	                      console.log(history[0]);
+	                      // console.log(history[0]);
 	                    }
-	              var img = history[index];
-	              apodDisplay(img);
-	            }
-	            request.send();
-	          }
+	                    var img = history[index];
+	                    apodDisplay(img);
+	                  }
+	                  request.send();
+	                }
 	
-	            var saveToDb = function(data){
+	              var addToFavourites = function(event){
+	                  console.log(event);
 	             var request = new XMLHttpRequest();
-	             request.open("POST", '/history');
+	             request.open("POST", '/favourites');
 	             request.setRequestHeader("Content-Type", "application/json");
-	             console.log(request);
+	             // console.log(request);
 	             request.onload = function(){
 	              if(request.status === 200){
-	                console.log('Posted to Db');
+	                console.log('Posted to Favourites!');
+	              }
+	            }
+	            request.send(JSON.stringify(lastImage[0]));
+	          }
+	
+	          var saveToDb = function(data){
+	           var request = new XMLHttpRequest();
+	           request.open("POST", '/history');
+	           request.setRequestHeader("Content-Type", "application/json");
+	             // console.log(request);
+	             request.onload = function(){
+	              if(request.status === 200){
+	                console.log('Posted to Db!');
 	              }
 	            }
 	            request.send(JSON.stringify(data));
 	          }
+	
+	
 	
 	  // var showVideo = function(src, width, height, alt) {
 	  //   var imgDiv = document.getElementById('img');

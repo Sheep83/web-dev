@@ -33,6 +33,28 @@ app.post('/history', function(req,res){
    });
  })
 
+app.post('/favourites', function(req,res){
+ var url = 'mongodb://localhost:27017/apod';
+   MongoClient.connect(url, function(err, db) {
+     var collection = db.collection('favourites');
+       collection.insert(req.body)
+       res.status(200).end()
+       db.close();
+   });
+ })
+
+app.get('/favourites', function(req,res){
+   // Connection URL
+   var url = 'mongodb://localhost:27017/apod';
+   MongoClient.connect(url, function(err, db) {
+     var collection = db.collection('favourites');
+     collection.find({}).toArray(function(err, docs) {
+       res.json(docs)
+       db.close();
+     });
+   });
+ })
+
 app.use(express.static('public'));
 
 var server = app.listen(3000, function () {
