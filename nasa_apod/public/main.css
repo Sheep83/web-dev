@@ -64,6 +64,9 @@ a {
   padding-bottom:20px;
   padding-top:20px;
   padding-left:20px;
+  transition: all 500ms ease;
+  float: left;
+
   /*margin: auto;*/
   /*float: left;*/
   /*width: 400;
@@ -97,7 +100,7 @@ button {
   transition: all 500ms ease; 
 }
 
-img:hover {
+#img:hover {
   /*transform: skew(-10deg);*/
   transform: scale(1.75);
 }

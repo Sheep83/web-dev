@@ -215,11 +215,11 @@
 	                  request.send();
 	                }
 	
-	              var addToFavourites = function(event){
+	                var addToFavourites = function(event){
 	                  console.log(event);
-	             var request = new XMLHttpRequest();
-	             request.open("POST", '/favourites');
-	             request.setRequestHeader("Content-Type", "application/json");
+	                  var request = new XMLHttpRequest();
+	                  request.open("POST", '/favourites');
+	                  request.setRequestHeader("Content-Type", "application/json");
 	             // console.log(request);
 	             request.onload = function(){
 	              if(request.status === 200){
