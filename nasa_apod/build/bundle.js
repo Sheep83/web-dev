@@ -72,11 +72,19 @@
 	    request.send();
 	  }
 	
+	  var main = function(data){
+	    apodDisplay(data);
+	    populateHistory();
+	  }
+	
 	  var apodDisplay = function(data){
 	    var stats = document.querySelectorAll('#info p');
 	    var title = document.getElementById('subheading');
 	    var image = document.getElementById('fullSize');
+	    console.log(data.hdurl);
+	
 	    image.innerHTML = "<a href= '"+ data.hdurl + "'>Full Size"
+	
 	    title.innerHTML = "<b><center>" + data.title + "</center></b>"
 	    stats[0].innerHTML = "" + data.explanation;
 	    stats[1].innerHTML = "<b>Copyright : </b>" + data.copyright;
@@ -89,8 +97,8 @@
 	      console.log('Video Support Coming Soon!')
 	      // showVideo(data.url, 500, 375, data.url)
 	    }
-	
 	  }
+	
 	  var showImage = function(src, width, height, alt) {
 	    var imgDiv = document.getElementById('img');
 	    if (imgDiv.firstChild){
@@ -108,34 +116,6 @@
 	    img.alt = src;
 	    imgDiv.appendChild(img);
 	  }
-	}
-	
-	var showVideo = function(src, width, height, alt) {
-	  var imgDiv = document.getElementById('img');
-	  if (imgDiv.firstChild){
-	    imgDiv.removeChild(imgDiv.firstChild);
-	    var video = document.createElement("video");
-	    video.src = src;
-	    video.width = 500;
-	    video.height = 375;
-	    video.alt = src;
-	    video.type="video/mp4";
-	    imgDiv.appendChild(video);
-	  }else{var video = document.createElement("video");
-	  video.src = src;
-	  video.width = 500;
-	  video.height = 375;
-	  video.alt = src;
-	  video.type="video/mp4";
-	  imgDiv.appendChild(video);
-	  video.play();
-	}
-	
-	}
-	
-	var main = function(data){
-	  apodDisplay(data);
-	  populateHistory();
 	}
 	
 	var randomDate = function(){
@@ -163,8 +143,6 @@
 	      }
 	      request.send();
 	    }
-	
-	
 	    var getByDate = function(event){
 	      console.log(event);
 	      selected = event.target.value;
@@ -184,37 +162,64 @@
 	        }
 	        request.send();
 	      }
+	
 	      var populateHistory = function(){
-	        var local = localStorage.getItem('selectedHistory');
-	        console.log( local )
-	        local2 = JSON.parse(local);
-	        // console.log(local[0]);
-	        if (local === null){
-	          return
-	        }else{
-	          visited.push(local)
-	          var historyDropDown = document.querySelector('#history');
-	          historyDropDown.innerHTML = "";
-	          console.log(visited);
-	          visited.forEach(function (item, index) {
-	            item.index = index;
-	            var option = document.createElement("option");
-	            option.value = index.toString();
-	            option.text = item.title;
-	            historyDropDown.appendChild(option);
-	          });
-	          historyDropDown.style.display = 'block';
+	        var request = new XMLHttpRequest();
+	        request.open("GET", '/history');
+	        request.setRequestHeader("Content-Type", "application/json");
+	             // console.log(request);
+	             request.onload = function(){
+	               if(request.status === 200){
+	                var jsonString = request.responseText;
+	                var history = JSON.parse(jsonString);
+	                console.log(history);
+	              }
+	              var historyDropDown = document.querySelector('#history');
+	              historyDropDown.innerHTML = "";
+	              history.forEach(function (item, index) {
+	                item.index = index;
+	                var option = document.createElement("option");
+	                option.value = index.toString();
+	                option.text = item.title;
+	                historyDropDown.appendChild(option);
+	              });
+	
+	
+	
+	              historyDropDown.style.display = 'block';
+	
+	                // visited.push(data);
+	
+	              }
+	              request.send();
+	
+	              //functions here
+	              // main(data);
+	              // saveToDb(data);
+	            }
+	
+	        //     var historyDropDown = document.querySelector('#history');
+	        //     historyDropDown.innerHTML = "";
+	        //     console.log(visited);
+	        //     visited.forEach(function (item, index) {
+	        //       item.index = index;
+	        //       var option = document.createElement("option");
+	        //       option.value = index.toString();
+	        //       option.text = item.title;
+	        //       historyDropDown.appendChild(option);
+	        //     });
+	        //     historyDropDown.style.display = 'block';
+	        //   }
+	        // }
+	
+	        var getFromHistory = function(event){
+	          console.log(event);
+	          var index = this.value;
+	          var img = visited[index];
+	          apodDisplay(img);
 	        }
-	      }
 	
-	      var getFromHistory = function(event){
-	        console.log(event);
-	        var index = this.value;
-	        var img = visited[index];
-	        apodDisplay(img);
-	      }
-	
-	      var saveToDb = function(data){
+	        var saveToDb = function(data){
 	     // AJAX POST to /savedSearches
 	     var request = new XMLHttpRequest();
 	     request.open("POST", '/history');
@@ -222,10 +227,34 @@
 	     console.log(request);
 	     request.onload = function(){
 	      if(request.status === 200){
+	        console.log('Posted to Db');
 	      }
 	    }
 	    request.send(JSON.stringify(data));
 	  }
+	
+	  // var showVideo = function(src, width, height, alt) {
+	  //   var imgDiv = document.getElementById('img');
+	  //   if (imgDiv.firstChild){
+	  //     imgDiv.removeChild(imgDiv.firstChild);
+	  //     var video = document.createElement("video");
+	  //     video.src = src;
+	  //     video.width = 500;
+	  //     video.height = 375;
+	  //     video.alt = src;
+	  //     video.type="video/mp4";
+	  //     imgDiv.appendChild(video);
+	  //   }else{var video = document.createElement("video");
+	  //   video.src = src;
+	  //   video.width = 500;
+	  //   video.height = 375;
+	  //   video.alt = src;
+	  //   video.type="video/mp4";
+	  //   imgDiv.appendChild(video);
+	  //   video.play();
+	  // }
+	
+	  // }
 	
 	
 	
