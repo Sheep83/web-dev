@@ -5,6 +5,7 @@
     <title>NASA APOD</title>
     <link rel='stylesheet' type='text/css' href='main.css'>
     <script src='app.js'></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:600,400' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -38,11 +39,16 @@
     <div id="separator">
       <hr>
   </div>
+  <div id = 'mini-head'><img width=36 height = 36 src='/history.png'></img>
+        <select style="max-width:95%" id="favs">
+        </select>
   <button id = "favourite" class = 'grow' type="button">Favourite</button> 
+  </div>
 </form>
 <a href='/'>
     <div id = 'img' class = 'grow' align = 'center'></div>  
 </a>
+<div id = 'favs'></div>
 <div id = 'separator'>
 </div>
 <div id="info" align = 'justify'>

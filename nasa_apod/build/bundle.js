@@ -47,17 +47,19 @@
 	var lastImage = [];
 	
 	window.onload = function () {  
-	  visited = [];
 	  var url = 'https://api.nasa.gov/planetary/apod?&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
 	  var calendar = document.getElementById('inputDate');
 	  var button = document.getElementById('random');
 	  var historyDropDown = document.getElementById('history');
 	  var fullSizeButton = document.getElementById('fullSize');
-	  var favouriteButton = document.getElementById('favourite')
+	  var favouriteButton = document.getElementById('favourite');
+	  var getFavourites = document.getElementById('favs');
+	  
 	  calendar.onchange = getByDate;
 	  button.onclick = randomDate;
 	  historyDropDown.onchange = getFromHistory;
 	  favouriteButton.onclick = addToFavourites;
+	  getFavourites.onchange = getFromFavourites;
 	    // fullSizeButton.onclick = showFullSize;
 	    // console.log(url);
 	    var request = new XMLHttpRequest();
@@ -66,7 +68,6 @@
 	      if (request.status === 200) {
 	        var jsonString = request.responseText;
 	        var data = JSON.parse(jsonString);
-	        // console.log(data);
 	      }
 	      main(data);
 	    }
@@ -76,21 +77,19 @@
 	  var main = function(data){
 	    apodDisplay(data);
 	    populateHistory();
+	    populateFavourites();
+	
 	  }
 	
 	  var apodDisplay = function(data){
 	    var stats = document.querySelectorAll('#info p');
 	    var title = document.getElementById('subheading');
 	    var image = document.getElementById('fullSize');
-	    // console.log(data.hdurl);
-	
 	    image.innerHTML = "<a href= '"+ data.hdurl + "'>Full Size"
-	
 	    title.innerHTML = "<b><center>" + data.title + "</center></b>"
 	    stats[0].innerHTML = "" + data.explanation;
 	    stats[1].innerHTML = "<b>Copyright : </b>" + data.copyright;
 	    stats[2].innerHTML = "<b>Date : </b>" + data.date;
-	    // console.log(data);
 	    if (data.media_type === "image"){
 	      showImage(data.url, 500, 375, data.url);
 	    }else if (data.media_type === 'video'){
@@ -133,18 +132,14 @@
 	  randYear = Math.floor(Math.random() * (2015 - 1996) + 1996);
 	  array.push(randYear, randMonth, randDay);
 	  randDate = array.join('-');
-	  // console.log(randDate);
 	  url = 'https://api.nasa.gov/planetary/apod?date=' + randDate + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
 	  var request = new XMLHttpRequest();
 	  request.open("GET", url);
 	  request.setRequestHeader("Content-Type", "application/json");
-	       // console.log(request);
 	       request.onload = function(){
 	         if(request.status === 200){
 	          var jsonString = request.responseText;
 	          var data = JSON.parse(jsonString);
-	          // console.log(data);
-	          visited.push(data);
 	        } 
 	        main(data);
 	        saveToDb(data);
@@ -166,6 +161,7 @@
 	          var length = localStorage.length;
 	        }
 	        main(data);
+	        saveToDb(data);
 	      }
 	      request.send();
 	    }
@@ -179,7 +175,13 @@
 	               if(request.status === 200){
 	                var jsonString = request.responseText;
 	                var history = JSON.parse(jsonString);
-	                // console.log(history);
+	              }
+	              console.log(history.length);
+	              if(history.length > 3){
+	                history.shift();
+	                // history.push(lastImage[0]);
+	              }else
+	              {history.push(lastImage[0]);
 	              }
 	              var historyDropDown = document.querySelector('#history');
 	              historyDropDown.innerHTML = "";
@@ -197,17 +199,14 @@
 	          }
 	
 	          var getFromHistory = function(event){
-	              // console.log(event);
 	              var index = this.value;
 	              var request = new XMLHttpRequest();
 	              request.open("GET", '/history');
 	              request.setRequestHeader("Content-Type", "application/json");
-	                   // console.log(request);
 	                   request.onload = function(){
 	                     if(request.status === 200){
 	                      var jsonString = request.responseText;
 	                      var history = JSON.parse(jsonString);
-	                      // console.log(history[0]);
 	                    }
 	                    var img = history[index];
 	                    apodDisplay(img);
@@ -220,11 +219,12 @@
 	                  var request = new XMLHttpRequest();
 	                  request.open("POST", '/favourites');
 	                  request.setRequestHeader("Content-Type", "application/json");
-	             // console.log(request);
 	             request.onload = function(){
 	              if(request.status === 200){
 	                console.log('Posted to Favourites!');
 	              }
+	                populateFavourites();
+	
 	            }
 	            request.send(JSON.stringify(lastImage[0]));
 	          }
@@ -233,7 +233,6 @@
 	           var request = new XMLHttpRequest();
 	           request.open("POST", '/history');
 	           request.setRequestHeader("Content-Type", "application/json");
-	             // console.log(request);
 	             request.onload = function(){
 	              if(request.status === 200){
 	                console.log('Posted to Db!');
@@ -241,6 +240,46 @@
 	            }
 	            request.send(JSON.stringify(data));
 	          }
+	
+	          var populateFavourites = function(){
+	            var request = new XMLHttpRequest();
+	            request.open("GET", '/favourites');
+	            request.setRequestHeader("Content-Type", "application/json");
+	                   request.onload = function(){
+	                     if(request.status === 200){
+	                      var jsonString = request.responseText;
+	                      var favourites = JSON.parse(jsonString);
+	                      console.log(favourites);
+	                    }
+	                    var favouritesDropDown = document.querySelector('#favs');
+	                    favouritesDropDown.innerHTML = "";
+	                    favourites.forEach(function (item, index) {
+	                      item.index = index;
+	                      var option = document.createElement("option");
+	                      option.value = index.toString();
+	                      option.text = item.title;
+	                      favouritesDropDown.appendChild(option);
+	                    });
+	                    favouritesDropDown.style.display = 'block';
+	                  }
+	                  request.send();
+	
+	                }
+	                var getFromFavourites = function(event){
+	                    var index = this.value;
+	                    var request = new XMLHttpRequest();
+	                    request.open("GET", '/favourites');
+	                    request.setRequestHeader("Content-Type", "application/json");
+	                         request.onload = function(){
+	                           if(request.status === 200){
+	                            var jsonString = request.responseText;
+	                            var favourites = JSON.parse(jsonString);
+	                          }
+	                          var img = favourites[index];
+	                          apodDisplay(img);
+	                        }
+	                        request.send();
+	                      }
 	
 	
 	

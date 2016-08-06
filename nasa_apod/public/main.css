@@ -135,6 +135,10 @@ form{
   height: auto;
 }
 
+#favs{
+  margin-bottom: 10px;
+}
+
 select {
     font-size:9pt;
     letter-spacing:0.07em;
