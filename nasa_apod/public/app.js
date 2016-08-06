@@ -97,6 +97,7 @@ var randomDate = function(){
       }
       request.send();
     }
+
     var getByDate = function(event){
       console.log(event);
       selected = event.target.value;
@@ -109,8 +110,6 @@ var randomDate = function(){
           var data = JSON.parse(jsonString);
           visited.push(data);
           var length = localStorage.length;
-            // localStorage.setItem("selectedHistory",JSON.stringify(data));
-            // console.log(visited);    
           }
           main(data);
         }
@@ -137,55 +136,43 @@ var randomDate = function(){
                 option.text = item.title;
                 historyDropDown.appendChild(option);
               });
-
-
-
               historyDropDown.style.display = 'block';
-
-                // visited.push(data);
-
               }
               request.send();
 
-              //functions here
-              // main(data);
-              // saveToDb(data);
             }
 
-        //     var historyDropDown = document.querySelector('#history');
-        //     historyDropDown.innerHTML = "";
-        //     console.log(visited);
-        //     visited.forEach(function (item, index) {
-        //       item.index = index;
-        //       var option = document.createElement("option");
-        //       option.value = index.toString();
-        //       option.text = item.title;
-        //       historyDropDown.appendChild(option);
-        //     });
-        //     historyDropDown.style.display = 'block';
-        //   }
-        // }
+            var getFromHistory = function(event){
+              console.log(event);
+              var index = this.value;
+              var request = new XMLHttpRequest();
+              request.open("GET", '/history');
+              request.setRequestHeader("Content-Type", "application/json");
+                   // console.log(request);
+                   request.onload = function(){
+                     if(request.status === 200){
+                      var jsonString = request.responseText;
+                      var history = JSON.parse(jsonString);
+                      console.log(history[0]);
+                    }
+              var img = history[index];
+              apodDisplay(img);
+            }
+            request.send();
+          }
 
-        var getFromHistory = function(event){
-          console.log(event);
-          var index = this.value;
-          var img = visited[index];
-          apodDisplay(img);
-        }
-
-        var saveToDb = function(data){
-     // AJAX POST to /savedSearches
-     var request = new XMLHttpRequest();
-     request.open("POST", '/history');
-     request.setRequestHeader("Content-Type", "application/json");
-     console.log(request);
-     request.onload = function(){
-      if(request.status === 200){
-        console.log('Posted to Db');
-      }
-    }
-    request.send(JSON.stringify(data));
-  }
+            var saveToDb = function(data){
+             var request = new XMLHttpRequest();
+             request.open("POST", '/history');
+             request.setRequestHeader("Content-Type", "application/json");
+             console.log(request);
+             request.onload = function(){
+              if(request.status === 200){
+                console.log('Posted to Db');
+              }
+            }
+            request.send(JSON.stringify(data));
+          }
 
   // var showVideo = function(src, width, height, alt) {
   //   var imgDiv = document.getElementById('img');
