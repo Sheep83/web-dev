@@ -1,4 +1,5 @@
 window.onload = function () {
+  history = [];
   visited = [];
   var url = 'https://api.nasa.gov/planetary/apod?&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
   var calendar = document.getElementById('inputDate');
@@ -98,81 +99,38 @@ var randomDate = function(){
   randYear = Math.floor(Math.random() * (2015 - 1996) + 1996);
   array.push(randYear, randMonth, randDay);
   randDate = array.join('-');
-  // console.log(randDate);
+  console.log(randDate);
   url = 'https://api.nasa.gov/planetary/apod?date=' + randDate + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
-  // var request = new XMLHttpRequest();
-  // request.open("GET", url);
-  // request.onload = function () {
-  //   if (request.status === 200) {
-  //     var jsonString = request.responseText;
-  //     var data = JSON.parse(jsonString);
-  //     console.log(data);
-      // localStorage.setItem('selectedHistory', JSON.stringify(data));
-      // console.log(localStorage);
-      // addToStorage(data);
-      // console.log(localStorage);
-      var request = new XMLHttpRequest();
-      request.open("GET", '/history');
-      request.setRequestHeader("Content-Type", "application/json");
+  var request = new XMLHttpRequest();
+  request.open("GET", url);
+  request.setRequestHeader("Content-Type", "application/json");
        // console.log(request);
        request.onload = function(){
          if(request.status === 200){
-           var searches = JSON.parse(request.responseText)
-         }
-         // console.log(searches);
-
-      // console.log(data);
-      // var local = localStorage.getItem("selectedHistory");
-      // var localObject = JSON.parse(local);
-      //     console.log(localObject);
-      //     if (localObject === null){
-      //     console.log('Local Storage Empty!')
-      //     localStorage.setItem("selectedHistory", JSON.stringify(data)); 
-      //     console.log('Local Storage Updated!')
-
-      //     }else{
-      //     visited.push(data);
-      //     // visited.forEach(function(index, object){
-      //     //   visited.push(object);
-      //     // console.log(visited);
-      //     var objectsSent = JSON.stringify(visited);
-      //     var objects = localStorage.setItem("selectedHistory", (objectsSent));
-
-      
-      //     var retrieved = localStorage.getItem("selectedHistory");
-      //     var objectsGot = JSON.parse(retrieved);
-      //     console.log(objectsGot);
-
-
-          
-          // visited.push(data);
-
-          // local.push(data);
-          // console.log(visited);
-          // local.push(data);
-          // console.log(local);
-          // localStorage.setItem("selectedHistory", JSON.stringify(visited));
-          // console.log(localStorage);
-        // }
+          var jsonString = request.responseText;
+          var data = JSON.parse(jsonString);
+          console.log(data);
+          visited.push(data);
+        } 
+        main(data);
+        saveToDb(data);
       }
-      
-      main(data);
+      request.send();
     }
-    request.send();
-  }
 
-  var getByDate = function(event){
-    console.log(event);
-    selected = event.target.value;
-    url = 'https://api.nasa.gov/planetary/apod?&date=' + selected + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
-    var request = new XMLHttpRequest();
-    request.open("GET", url);
-    request.onload = function () {
-      if (request.status === 200) {
-        var jsonString = request.responseText;
-        var data = JSON.parse(jsonString);
-        visited.push(data);
-        var length = localStorage.length;
+
+    var getByDate = function(event){
+      console.log(event);
+      selected = event.target.value;
+      url = 'https://api.nasa.gov/planetary/apod?&date=' + selected + '&api_key=T1AUnT68vq8FeqlfaGROtZl5h6mk9iMoz9Z7MKNy';
+      var request = new XMLHttpRequest();
+      request.open("GET", url);
+      request.onload = function () {
+        if (request.status === 200) {
+          var jsonString = request.responseText;
+          var data = JSON.parse(jsonString);
+          visited.push(data);
+          var length = localStorage.length;
             // localStorage.setItem("selectedHistory",JSON.stringify(data));
             // console.log(visited);    
           }
@@ -180,14 +138,13 @@ var randomDate = function(){
         }
         request.send();
       }
-
       var populateHistory = function(){
         var local = localStorage.getItem('selectedHistory');
         console.log( local )
         local2 = JSON.parse(local);
         // console.log(local[0]);
         if (local === null){
-        return
+          return
         }else{
           visited.push(local)
           var historyDropDown = document.querySelector('#history');
@@ -208,30 +165,21 @@ var randomDate = function(){
         console.log(event);
         var index = this.value;
         var img = visited[index];
-        // console.log(index);    
         apodDisplay(img);
-    // localStorage.setItem("selectedImg",JSON.stringify(img));
+      }
 
+      var saveToDb = function(data){
+     // AJAX POST to /savedSearches
+     var request = new XMLHttpRequest();
+     request.open("POST", '/history');
+     request.setRequestHeader("Content-Type", "application/json");
+     console.log(request);
+     request.onload = function(){
+      if(request.status === 200){
+      }
+    }
+    request.send(JSON.stringify(data));
   }
 
-  // var addToStorage = function(data){
-  //   var local = localStorage.getItem("selectedHistory");
-  //   var localObject = JSON.parse(local);
-  //   console.log(localObject);
-  //   if (local === null){
-  //   var dataToSend = JSON.stringify(data);
-  //   console.log(dataToSend);
-  //   localStorage.setItem("selectedHistory", (dataToSend));
-  //   }else{
-  //   // console.log(localObject); 
-  //   // localObject.forEach(function(object){
-  //     visited.push(localObject);
-  //     console.log(visited);
-  //     visited.forEach(function(object){
-  //       console.log(object.title);
-  //     })
-  //   // })
-  //   }
-  // }
 
 
