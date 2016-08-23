@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">LifeTracker</string>
+    <string name="list_header">All Tasks</string>
+    <string name="task_header">Task View</string>
+    <string name="new_task_header">Add more stuff</string>
+    <string name="complete">Completed on : </string>
+    <string name="not_complete">Not Yet Complete</string>
+    <string name="boring_title">Boring stuff you just have to do. Yawn.</string>
+    <string name="work_title">Stuff you have to do for work. Job Required.</string>
+    <string name="social_title">Going to the pub and stuff.</string>
+    <string name="recreation_title">Stuff to do for fun. Keep it clean.</string>
+    <string name="life_title">Stuff you\'d like to do but probably never will.</string>
+    <string name="clear_mem_title">Reset your life. As if.</string>
+    <string name="edit_header">Edit your stuff</string>
+
+
+
+
+
+
+
+</resources>

@@ -111,8 +111,8 @@ var randomDate = function(){
         if (request.status === 200) {
           var jsonString = request.responseText;
           var data = JSON.parse(jsonString);
-          visited.push(data);
-          var length = localStorage.length;
+          // visited.push(data);
+          // var length = localStorage.length;
         }
         main(data);
         saveToDb(data);
@@ -131,12 +131,12 @@ var randomDate = function(){
                 var history = JSON.parse(jsonString);
               }
               console.log(history.length);
-              if(history.length > 3){
-                history.shift();
-                // history.push(lastImage[0]);
-              }else
-              {history.push(lastImage[0]);
-              }
+              // if(history.length > 3){
+              //   history.shift();
+              //   // history.push(lastImage[0]);
+              // }else
+              // {history.push(lastImage[0]);
+              // }
               var historyDropDown = document.querySelector('#history');
               historyDropDown.innerHTML = "";
               history.forEach(function (item, index) {

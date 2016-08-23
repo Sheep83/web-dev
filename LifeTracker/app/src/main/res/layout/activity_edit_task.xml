@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/jotter">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="30dp"
+        android:id="@+id/page_header"
+        android:text="@string/edit_header"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="40dp" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="25dp"
+        android:id="@+id/edit_title_header"
+        android:text="Edit Title"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="55dp" />
+
+    <EditText
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Title"
+        android:id="@+id/task_title"
+        android:textSize="20dp"
+        android:paddingLeft="55dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="25dp"
+        android:id="@+id/edit_text_header"
+        android:text="Edit Description"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="55dp" />
+
+    <EditText
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Text"
+        android:id="@+id/task_text"
+        android:textSize="20dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="55dp" />
+
+    <Button
+        android:id="@+id/apply_button"
+        android:text="Apply"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/complete_task_button"
+        android:text="Completed"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!--<DatePicker-->
+        <!--android:id="@+id/date_picker"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/change_date_button"-->
+        <!--android:text="Completed"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:layout_marginLeft="25dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+</LinearLayout>

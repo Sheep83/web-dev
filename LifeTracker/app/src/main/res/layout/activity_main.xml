@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <ImageButton
+    android:contentDescription="Boring Tasks"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="10dp"
+    android:id="@+id/boring_button"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/boring"
+    android:text="Boring" />
+
+            <TextView
+                android:layout_toRightOf="@id/boring_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:id="@+id/boring_text"
+                android:text="@string/boring_title"
+                android:layout_alignBottom="@+id/boring_button"
+                android:layout_alignTop="@+id/boring_button"
+                android:textStyle="bold"
+                android:autoText="false"
+                android:gravity="fill" />
+
+    <ImageButton
+        android:layout_below="@id/boring_button"
+        android:contentDescription="Work Tasks"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="10dp"
+    android:id="@+id/work_button"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/work" />
+
+            <TextView
+                android:layout_toRightOf="@id/work_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:id="@+id/work_text"
+                android:text="@string/work_title"
+                android:layout_alignBottom="@+id/work_button"
+                android:layout_alignTop="@+id/work_button"
+                android:gravity="fill"
+                android:textStyle="bold" />
+
+    <ImageButton
+        android:layout_below="@id/work_button"
+        android:contentDescription="Social Tasks"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="10dp"
+    android:id="@+id/social_button"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/social"/>
+
+            <TextView
+                android:layout_toRightOf="@id/social_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:id="@+id/social_text"
+                android:text="@string/social_title"
+                android:layout_alignBottom="@+id/social_button"
+                android:layout_alignTop="@+id/social_button"
+                android:textStyle="bold"
+                android:gravity="fill" />
+
+    <ImageButton
+        android:layout_below="@id/social_button"
+        android:contentDescription="Recreation Goals"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="10dp"
+    android:id="@+id/recreation_button"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/recreation"/>
+
+            <TextView
+                android:layout_toRightOf="@id/recreation_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:id="@+id/recreation_text"
+                android:text="@string/recreation_title"
+                android:layout_alignBottom="@+id/recreation_button"
+                android:layout_alignTop="@+id/recreation_button"
+                android:gravity="fill"
+                android:textStyle="bold" />
+
+    <ImageButton
+        android:layout_below="@id/recreation_button"
+        android:contentDescription="Life Goals"
+    android:scaleType="fitCenter"
+    android:layout_marginTop="10dp"
+    android:id="@+id/life_button"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@drawable/life"/>
+
+            <TextView
+                android:layout_toRightOf="@id/recreation_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:id="@+id/life_text"
+                android:text="@string/life_title"
+                android:layout_alignBottom="@+id/life_button"
+                android:layout_alignTop="@+id/life_button"
+                android:textStyle="bold"
+                android:gravity="fill" />
+
+
+    <Button
+        android:layout_below="@id/life_button"
+        android:text="Clear Memory"
+        android:hint="@string/clear_mem_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/clear_mem_button" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent">-->
+
+<!--<TableRow-->
+    <!--android:id="@+id/TableRow01"-->
+    <!--android:layout_weight="0">-->
+
+    <!--<ImageButton-->
+    <!--android:contentDescription="Boring Tasks"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:id="@+id/boring_button"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:src="@drawable/boring"-->
+        <!--android:text="Boring"-->
+        <!--/>-->
+
+    <!--<ImageButton-->
+    <!--android:contentDescription="Work Tasks"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:id="@+id/work_button"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:src="@drawable/work" />-->
+
+    <!--<ImageButton-->
+    <!--android:contentDescription="Social Tasks"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:id="@+id/social_button"-->
+    <!--android:layout_width="120dp"-->
+    <!--android:layout_height="120dp"-->
+    <!--android:src="@drawable/social"-->
+        <!--android:layout_column="2" />-->
+
+<!--</TableRow>-->
+
+    <!--<TableRow-->
+        <!--android:id="@+id/TableRow02"-->
+        <!--android:layout_weight="0" >-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="20dp"-->
+            <!--android:id="@+id/boringtext"-->
+            <!--android:text="boring test"-->
+            <!--android:autoText="false"-->
+            <!--android:textAlignment="center" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="120dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="20dp"-->
+            <!--android:id="@+id/worktext"-->
+            <!--android:text="work test"-->
+            <!--android:textAlignment="center" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="120dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="20dp"-->
+            <!--android:id="@+id/socialtext"-->
+            <!--android:text="social test"-->
+            <!--android:textAlignment="center" />-->
+    <!--</TableRow>-->
+
+<!--<TableRow-->
+    <!--android:id="@+id/tableRow03"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="0"-->
+    <!--android:layout_marginLeft="60dp"-->
+    <!--android:layout_marginRight="60dp">-->
+
+    <!--<ImageButton-->
+        <!--android:contentDescription="Life Goals"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/life_button"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="120dp"-->
+        <!--android:src="@drawable/life"-->
+        <!--android:layout_column="0" />-->
+
+    <!--<ImageButton-->
+        <!--android:contentDescription="Recreation Tasks"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/recreation_button"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="120dp"-->
+        <!--android:src="@drawable/recreation"-->
+        <!--android:layout_column="1" />-->
+
+<!--</TableRow>-->
+
+    <!--<Button-->
+        <!--android:text="Clear Memory"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/clear_mem_button" />-->
+
+<!--</TableLayout>-->
