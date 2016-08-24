@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +27,7 @@ public class TaskList extends AppCompatActivity {
     ArrayList<Task> mTaskArray;
     ArrayList<Task> mTaskTypedArray;
     TextView mHeaderText;
-    Button mAddTaskButton;
+    ImageButton mAddTaskButton;
     String taskType;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,7 +60,7 @@ public class TaskList extends AppCompatActivity {
         ArrayAdapter<Task> arrayAdapter = new TaskArrayAdapter(this, android.R.layout.simple_list_item_1, mTaskTypedArray);
 //        ArrayAdapter<Task> arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, mTaskArray);
         mListView.setAdapter(arrayAdapter);
-        mAddTaskButton = (Button)findViewById(R.id.add_task_button);
+        mAddTaskButton = (ImageButton)findViewById(R.id.add_task_button);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -78,6 +81,7 @@ public class TaskList extends AppCompatActivity {
         mAddTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(TaskList.this, NewTask.class);
                 intent.putExtra("type", taskType);
                 Log.d("LifeTracker:", " New Task started...");

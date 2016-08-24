@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.content.Context;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class NewTask extends AppCompatActivity {
 
     TextView mPageHeader;
     ListView mListView;
-    Button mAddButton;
+    ImageButton mAddButton;
     Button mClearButton;
     EditText mTaskTitle;
     EditText mTaskText;
@@ -52,7 +54,7 @@ public class NewTask extends AppCompatActivity {
             mTaskArray = SavedTaskPreferences.convertToObjectArray(this, json_saved);
         }
         mPageHeader = (TextView) findViewById(R.id.new_task_header);
-        mAddButton = (Button)findViewById(R.id.add_task_button);
+        mAddButton = (ImageButton)findViewById(R.id.add_task_button);
         mClearButton = (Button)findViewById(R.id.clear_mem_button);
         mTaskTitle = (EditText)findViewById(R.id.task_title);
         mTaskText = (EditText)findViewById(R.id.task_text);
@@ -78,7 +80,7 @@ public class NewTask extends AppCompatActivity {
                     mTaskArray = gson.fromJson(json_saved, objectType);
                     Log.d("Saved Tasks : ", mTaskArray + " array contents");
                 }
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 String newTitle = mTaskTitle.getText().toString();
                 String newText = mTaskText.getText().toString();
                 String newType = mTaskType;

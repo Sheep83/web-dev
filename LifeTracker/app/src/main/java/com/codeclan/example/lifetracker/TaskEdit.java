@@ -3,13 +3,16 @@ package com.codeclan.example.lifetracker;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -33,8 +36,8 @@ public class TaskEdit extends AppCompatActivity {
     TextView mPageTitle;
     TextView mTitleText;
     TextView mDescriptionText;
-    Button mApplyButton;
-    Button mCompleteTaskButton;
+    ImageButton mApplyButton;
+    ImageButton mCompleteTaskButton;
     ArrayList<Task> savedTasks;
     Task selectedTask;
     String json;
@@ -50,12 +53,12 @@ public class TaskEdit extends AppCompatActivity {
         mTextEdit = (EditText) findViewById(R.id.task_text);
         mDescriptionText = (TextView) findViewById(R.id.edit_text_header);
         mTitleText = (TextView) findViewById(R.id.edit_title_header);
-        mApplyButton = (Button) findViewById(R.id.apply_button);
-        mCompleteTaskButton = (Button) findViewById(R.id.complete_task_button);
-        mCalendar = Calendar.getInstance();
-        year = mCalendar.get(Calendar.YEAR);
-        month = mCalendar.get(Calendar.MONTH);
-        day = mCalendar.get(Calendar.DAY_OF_MONTH);
+        mApplyButton = (ImageButton) findViewById(R.id.apply_button);
+        mCompleteTaskButton = (ImageButton) findViewById(R.id.complete_task_button);
+//        mCalendar = Calendar.getInstance();
+//        year = mCalendar.get(Calendar.YEAR);
+//        month = mCalendar.get(Calendar.MONTH);
+//        day = mCalendar.get(Calendar.DAY_OF_MONTH);
 //        showDate(year, month+1, day);
         Typeface pencil_font = Typeface.createFromAsset(getAssets(), "fonts/pencil.ttf");
         mTitleEdit.setTypeface(pencil_font);
@@ -90,6 +93,7 @@ public class TaskEdit extends AppCompatActivity {
                         SavedTaskPreferences.setStoredTasks(view.getContext(), newJsonArrayString);
                     }
                 }
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Log.d("New Array : ", "" + savedTasks);
                 Intent intent = new Intent(TaskEdit.this, LifeTracker.class);
                 intent.putExtra("type", selectedTask.getType());
@@ -103,8 +107,8 @@ public class TaskEdit extends AppCompatActivity {
             public void onClick(View view) {
                 String oldTitle = selectedTask.getTitle();
                 String oldText = selectedTask.getText();
-                String newTitle = mTitleEdit.getText().toString();
-                String newText = mTextEdit.getText().toString();
+//                String newTitle = mTitleEdit.getText().toString();
+//                String newText = mTextEdit.getText().toString();
 //                selectedTask.setText(newText);
                 for (Task task : savedTasks) {
                     if (task.getTitle().equals(oldTitle) && task.getText().equals(oldText)) {
@@ -120,6 +124,7 @@ public class TaskEdit extends AppCompatActivity {
                         SavedTaskPreferences.setStoredTasks(view.getContext(), newJsonArrayString);
                     }
                 }
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(TaskEdit.this, LifeTracker.class);
                 Log.d("LifeTracker:", " Task marked completed, returning to main menu...");
                 startActivity(intent);

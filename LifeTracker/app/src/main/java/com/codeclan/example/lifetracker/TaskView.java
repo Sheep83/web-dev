@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.google.gson.Gson;
@@ -20,8 +22,8 @@ public class TaskView extends AppCompatActivity {
     TextView mTitleText;
     TextView mDescriptionText;
     TextView mCompleted;
-    Button mEditTaskButton;
-    Button mDeleteTaskButton;
+    ImageButton mEditTaskButton;
+    ImageButton mDeleteTaskButton;
     ArrayList<Task> savedTasks;
     Task selectedTask;
     String json;
@@ -35,8 +37,8 @@ public class TaskView extends AppCompatActivity {
         mTitleText = (TextView) findViewById(R.id.title);
         mDescriptionText = (TextView) findViewById(R.id.text);
         mCompleted = (TextView) findViewById(R.id.complete);
-        mEditTaskButton = (Button) findViewById(R.id.edit_task_button);
-        mDeleteTaskButton = (Button) findViewById(R.id.delete_task_button);
+        mEditTaskButton = (ImageButton) findViewById(R.id.edit_task_button);
+        mDeleteTaskButton = (ImageButton) findViewById(R.id.delete_task_button);
         Typeface pencil_font = Typeface.createFromAsset(getAssets(), "fonts/pencil.ttf");
         mTitleText.setTypeface(pencil_font);
         mDescriptionText.setTypeface(pencil_font);
@@ -65,10 +67,12 @@ public class TaskView extends AppCompatActivity {
                         SavedTaskPreferences.setStoredTasks(view.getContext(), newJsonArrayString);
                     }
                 }
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Log.d("New Array : ", "" + savedTasks);
                 Intent intent = new Intent(TaskView.this, LifeTracker.class);
                 intent.putExtra("object", json);
                 Log.d("LifeTracker:", " Deleted, returning to main menu...");
+
                 startActivity(intent);
             }
         });
@@ -76,6 +80,7 @@ public class TaskView extends AppCompatActivity {
         mEditTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Log.d("New Array : ", "" + savedTasks);
                 Intent intent = new Intent(TaskView.this, TaskEdit.class);
                 intent.putExtra("object", json);

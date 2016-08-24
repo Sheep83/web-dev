@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">LifeTracker</string>
-    <string name="list_header">All Tasks</string>
-    <string name="task_header">Task View</string>
+    <string name="app_name">Your Stuff\'d</string>
+    <string name="list_header">Some stuff</string>
+    <string name="task_header">This stuff</string>
     <string name="new_task_header">Add more stuff</string>
     <string name="complete">Completed on : </string>
     <string name="not_complete">Not Yet Complete</string>
@@ -12,11 +12,6 @@
     <string name="life_title">Stuff you\'d like to do but probably never will.</string>
     <string name="clear_mem_title">Reset your life. As if.</string>
     <string name="edit_header">Edit your stuff</string>
-
-
-
-
-
-
+    <string name="title_text">Your Stuff\'d</string>
 
 </resources>

@@ -37,15 +37,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/task_list_view"
-        android:paddingLeft="55dp" />
+        android:paddingLeft="55dp"
+        android:divider="@drawable/line"
+        android:dividerHeight="10dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:background="?attr/selectableItemBackground"
         android:id="@+id/add_task_button"
-        android:text="Add Task"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginLeft="60dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/add"
+        android:padding="3dp"/>
+    </RelativeLayout>
 
 
 

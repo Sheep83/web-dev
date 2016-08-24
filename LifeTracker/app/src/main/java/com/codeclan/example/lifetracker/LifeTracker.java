@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,12 +25,13 @@ import java.util.Random;
  * Created by user on 21/08/2016.
  */
 public class LifeTracker extends AppCompatActivity {
-    TextView mBoringText;
-    TextView mWorkText;
-    TextView mSocialText;
-    TextView mRecText;
-    TextView mLifeText;
-    TextView mClearText;
+    TextView mTitleText, mBoringText, mWorkText, mSocialText, mRecText, mLifeText, mClearText;
+//    TextView mBoringText;
+//    TextView mWorkText;
+//    TextView mSocialText;
+//    TextView mRecText;
+//    TextView mLifeText;
+//    TextView mClearText;
     ImageButton mBoringButton;
     ImageButton mSocialButton;
     ImageButton mWorkButton;
@@ -41,6 +43,7 @@ public class LifeTracker extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTitleText = (TextView) findViewById(R.id.title_text);
         mBoringButton = (ImageButton)findViewById(R.id.boring_button);
         mWorkButton = (ImageButton)findViewById(R.id.work_button);
         mSocialButton = (ImageButton)findViewById(R.id.social_button);
@@ -53,6 +56,7 @@ public class LifeTracker extends AppCompatActivity {
         mRecText = (TextView) findViewById(R.id.recreation_text);
         mLifeText = (TextView) findViewById(R.id.life_text);
         Typeface pencil_font = Typeface.createFromAsset(getAssets(), "fonts/pencil.ttf");
+        mTitleText.setTypeface(pencil_font);
         mBoringText.setTypeface(pencil_font);
         mWorkText.setTypeface(pencil_font);
         mSocialText.setTypeface(pencil_font);
@@ -62,7 +66,7 @@ public class LifeTracker extends AppCompatActivity {
         mBoringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(LifeTracker.this, TaskList.class);
                 intent.putExtra("type", "Boring");
                 Log.d("LifeTracker:", "Boring Button Clicked!");
@@ -73,7 +77,7 @@ public class LifeTracker extends AppCompatActivity {
         mWorkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(LifeTracker.this, TaskList.class);
                 intent.putExtra("type", "Work");
                 Log.d("LifeTracker: ", "Work Button Clicked!");
@@ -84,7 +88,7 @@ public class LifeTracker extends AppCompatActivity {
         mSocialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(LifeTracker.this, TaskList.class);
                 intent.putExtra("type", "Social");
                 Log.d("LifeTracker: ", "Social Button Clicked!");
@@ -95,7 +99,7 @@ public class LifeTracker extends AppCompatActivity {
         mRecButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(LifeTracker.this, TaskList.class);
                 intent.putExtra("type", "Recreation");
                 Log.d("LifeTracker: ", "Recreation Button Clicked!");
@@ -106,7 +110,7 @@ public class LifeTracker extends AppCompatActivity {
         mLifeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                view.startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.bounce));
                 Intent intent = new Intent(LifeTracker.this, TaskList.class);
                 intent.putExtra("type", "Life");
                 Log.d("LifeTracker: ", "Life Button Clicked!");
