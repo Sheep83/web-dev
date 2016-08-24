@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.codeclan.example.lifetracker"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.codeclan.example.lifetracker.LifeTracker"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.codeclan.example.lifetracker.TaskList"
+            android:label="@string/list_header"
+            android:parentActivityName="com.codeclan.example.lifetracker.LifeTracker" >
+        </activity>
+        <activity
+            android:name="com.codeclan.example.lifetracker.NewTask"
+            android:label="@string/new_task_header"
+            android:parentActivityName="com.codeclan.example.lifetracker.TaskList" >
+        </activity>
+        <activity
+            android:name="com.codeclan.example.lifetracker.TaskView"
+            android:label="@string/task_header"
+            android:parentActivityName="com.codeclan.example.lifetracker.TaskList" >
+        </activity>
+        <activity
+            android:name="com.codeclan.example.lifetracker.TaskEdit"
+            android:label="@string/task_header"
+            android:parentActivityName="com.codeclan.example.lifetracker.TaskView" >
+        </activity>
+    </application>
+
+</manifest>
